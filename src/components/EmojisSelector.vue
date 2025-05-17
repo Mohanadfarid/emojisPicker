@@ -5,19 +5,18 @@ const selectedEmoji = defineModel<string>()
 const { emojis } = useEmoji()
 
 const resolveEmojiClasses = (emojiName: string) =>
-  emojiName === selectedEmoji.value ? 'active-emoji h-[37.5px] w-[37.5px] ' : ''
+  emojiName === selectedEmoji.value ? 'active-emoji h-[37.5px] w-[37.5px] animate-once animate-ping ' : ''
 </script>
 
 <template>
-
-  <div class="flex items-center border p-2  rounded-full">
+  <div class="flex items-center border p-2 rounded-full">
     <div
       v-for="emoji in emojis"
       :key="emoji.name"
-      class="cursor-pointer me-1 last:me-0 rounded-full "
+      class="cursor-pointer me-1 last:me-0 rounded-full"
     >
       <component
-        class="w-[25px] h-[25px] hover:h-[37.5px] hover:w-[37.5px] transition-all "
+        class="w-[25px] h-[25px] hover:h-[37.5px] hover:w-[37.5px] transition-all"
         :class="resolveEmojiClasses(emoji.name)"
         @click="selectedEmoji = emoji.name"
         :is="emoji.component"
@@ -27,7 +26,10 @@ const resolveEmojiClasses = (emojiName: string) =>
 </template>
 
 <style>
-.active-emoji path{
+.active-emoji path {
   fill: green !important;
+}
+.animate-once {
+  animation-iteration-count: 1;
 }
 </style>
